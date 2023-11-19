@@ -9,7 +9,7 @@ public class TestNgMavenExampleTest {
         String[] lines;
         lines = CsvConnector.readCsvData("src/test/resources/test_data.csv");
         for (String line : lines) {
-            System.out.println("Each Line: " + line);
+            System.out.println("Line Data: " + line);
             String[] dataArr = line.split(",");
             System.out.println("First Name: " + dataArr[0]);
             System.out.println("Last Name: " + dataArr[1]);
