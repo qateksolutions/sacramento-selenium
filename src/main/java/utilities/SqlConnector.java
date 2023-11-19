@@ -16,7 +16,7 @@ public class SqlConnector {
 
     /**
      * jdbc:postgresql://<database_host>:<port>/<database_name>
-     * "jdbc:postgresql://localhost:5432/mortgage_calculator"
+     * Example: "jdbc:postgresql://localhost:5432/mortgage_calculator"
      */
     private static final String ConnectionUrl = "jdbc:postgresql://" + Host + ":" + Port + "/" + DBName;
     // Alternative Implementation:
@@ -45,6 +45,7 @@ public class SqlConnector {
      * Reading Data from the database
      * @param SQL is used to send the SQL query
      * @return a ResultSet Object
+     * @throws Exception if failed to execute queries
      */
     public static ResultSet readDate(String SQL) throws Exception {
         ResultSet rs = null;
@@ -56,5 +57,4 @@ public class SqlConnector {
         }
         return rs;
     }
-
 }
