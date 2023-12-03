@@ -1,38 +1,14 @@
 package automation_test.mortgage_calculator_parameterized;
 
-import command_providers.ActOn;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import automation_test.BaseClass;
 import org.testng.annotations.Test;
 import page_objects.Home;
 import utilities.DateUtils;
-import utilities.ReadConfigFiles;
 import utilities.SqlConnector;
 
 import java.sql.ResultSet;
 
-public class CalculateMonthlyPaymentParameterized {
-    private static final Logger LOGGER = LogManager.getLogger(CalculateMonthlyPaymentParameterized.class);
-    WebDriver driver;
-
-    @BeforeMethod
-    public void browserInitialization() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-
-        LOGGER.info("----------Test Name: Calculate Monthly payment-------------");
-        String browserUrl = ReadConfigFiles.getPropertyValues("Url");
-        ActOn.browser(driver).openBrowser(browserUrl);
-    }
-
+public class CalculateMonthlyPaymentParameterized extends BaseClass {
     @Test
     public void calculateMonthlyPayment() throws Exception {
         String[] date = DateUtils.returnNextMonth();
@@ -58,11 +34,5 @@ public class CalculateMonthlyPaymentParameterized {
                     .clickOnCalculateButton()
                     .validateTotalMonthlyPayment(rs.getString("totalmonthlypayment"));
         }
-    }
-
-    @AfterMethod
-    public void browserCleanup() {
-        ActOn.browser(driver).closeBrowser();
-        LOGGER.info("----------End Test: Calculate Monthly payment-------------");
     }
 }
